@@ -1,11 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Session } from 'next-auth';
 import { usePathname } from 'next/navigation';
 import LoginButton from '@/components/auth/LoginButton';
 
-export default function Header({ session }: { session: Session | null }) {
+export default function Header({ session }: { session: any }) {
   const pathname = usePathname();
   
   return (

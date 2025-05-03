@@ -9,6 +9,7 @@ import { Inter } from 'next/font/google';
 import { getAuthSession } from '@/lib/auth';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import AuthProvider from '@/providers/SessionProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,11 +28,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="app-layout">
-          <Header session={session} />
-          <main className="main-content">{children}</main>
-          <Footer />
-        </div>
+        <AuthProvider>
+          <div className="app-layout">
+            <Header session={session} />
+            <main className="main-content">{children}</main>
+            <Footer />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

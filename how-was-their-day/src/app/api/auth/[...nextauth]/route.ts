@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "@auth/google-provider";
+import GoogleProvider from "next-auth/providers/google";
+import { UserSession } from "@/types";
 
 const handler = NextAuth({
   providers: [
@@ -16,10 +17,11 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id as string;
+      const userSession = session as UserSession;
+      if (userSession.user) {
+        userSession.user.id = token.id as string;
       }
-      return session;
+      return userSession;
     },
   },
   pages: {

@@ -5,7 +5,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function LoginButton() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  
+  // Show loading state while session is loading
+  if (status === "loading") {
+    return (
+      <button
+        className="login-button login-button-primary"
+        disabled
+      >
+        Loading...
+      </button>
+    );
+  }
 
   if (session && session.user) {
     return (
